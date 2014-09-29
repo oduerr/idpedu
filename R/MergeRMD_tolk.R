@@ -19,7 +19,7 @@
 #'  files = list.files(path='V:/tolk/Private/PROJECT 02 O. DUERR/TEST FILES',pattern = "HA0[1-2].Rmd")
 #'  
 #'  
-mergeRMD = function(dir = ".",title=".", files, printpaths=TRUE, mergedFileName = "book.Rmd") {
+mergeRMD = function(dir = ".",title=".", files, printpaths=FALSE, mergedFileName = "book.Rmd") {
   book_header = paste("---\ntitle:",title, "\n---")
   old = setwd(dir)
   
@@ -37,16 +37,7 @@ mergeRMD = function(dir = ".",title=".", files, printpaths=TRUE, mergedFileName 
   # Introduce a (character) vector of baseDir addresses 
   dir.insert=character(length=length(files))
   
-  
-  # Introduce file names. 
-  
-  
-  
-  #      list(matrix(nrow=1,ncol=))
-  
-  
   # dir.insert=list(matrix(nrow=1,ncol=length(files),dimnames=NULL))
-  
   
   for(i in 1:length(files)){
     text = readLines(files[i])
@@ -68,9 +59,7 @@ mergeRMD = function(dir = ".",title=".", files, printpaths=TRUE, mergedFileName 
     
     # Write files variable in the final Rmd document to make it accessable for every r chunk
     cell.insert[3]="options(useFancyQuotes = FALSE)" # options for sQuote to print plain quotation marks
-    cell.insert[4]=paste("files<<-c(",paste(sQuote(noquote(files)),collapse=","),")")
-    
-    # cell.insert[4]=paste("files<<-c(",paste(files,collapse=","),")")
+    cell.insert[4]=paste("files<-c(",paste(sQuote(noquote(files)),collapse=","),")")
     
     # DONE TODO: tolk pls make the baseDir in each aufgabe pointing to the directory the file came from.             
     # change baseDir for every individual Aufgabe
@@ -80,33 +69,25 @@ mergeRMD = function(dir = ".",title=".", files, printpaths=TRUE, mergedFileName 
     # Print Aufgabe file paths depending on the printpaths variable (default is print)
     if (printpaths==T){
       #cell.insert[6]=paste("cat(format(files[",i,"]))")
-      
+      # TODO print the last 80 characters, be careful and check
       cell.insert[6]=paste("message(files[",i,"])")
     } else {
       cell.insert[6]=""
     }
     
     cell.insert[7]="```"
-    
-    #  dir.insert[i]= as.character(cat("`r baseDir=dirname(files[",i,"])`", sep=" ")) # cat() gives 0-length output...(?)
-    
+
     text = c(text[1:metaspan[2]],cell.insert[1:7],text[(metaspan[2]+1):length(text)])
-    
-    
     # text = c(text[1:metaspan[2]],task.names[i],files[i],dir.insert[i],text[(metaspan[2]+1):length(text)])
     text = text[-c(metaspan[1]:metaspan[2])] # get rid of the meta-text
-    
+   
+    # TODO [Optional] Decide if we want to eliminate the newly written global variables
     # Delete all variables except lsg and baseDir 
     # to avoid variable conflict across files
-    text[length(text)+1]="```{r, echo=FALSE, eval=TRUE}"
-    text[length(text)+1]="rm(list=setdiff(objects(),c('lsg','baseDir')))"
-    
-    #DONE TODO: tolk, dueo remove or check why package not available
-    #  Alternative from package gdata:            
-    # text[length(text)+1]="keep(lsg,baseDir,sure=T)"
-    
-    text[length(text)+1]="```"      
-    
+    # text[length(text)+1]="```{r, echo=FALSE, eval=TRUE}"
+    #text[length(text)+1]="rm(list=setdiff(objects(),c('lsg','baseDir')))"
+    # text[length(text)+1]="```"      
+
     write(text, sep = "\n", file = mergedFileName, append = T) # sep = "\n" for newline sepation
   }
   
@@ -116,3 +97,4 @@ mergeRMD = function(dir = ".",title=".", files, printpaths=TRUE, mergedFileName 
   # render("book.Rmd", output_format = "pdf_document")
   setwd(old)
 }
+
