@@ -15,4 +15,28 @@ if (FALSE) {
            )
   createAB(infile = "/Users/oli/Dropbox/__ZHAW/WaST3/__Alle_HS14/__Ich__Wast3.HS14/Woche1/ab1.Rmd")
   rmdFiles <- list.files(path = "/Users/oli/Documents/workspace/wast/wast3/", pattern = "*.Rmd", recursive = TRUE)
+  
+  
+  
+  # Nice trick from Vasily for our windows users...
+  # x = readline()
+  # V:\tolk\Private\PROJECT_02_DUERR\_COLLECTION_AUFGABEN\DECOMPOSED
+  # path1=gsub("\\\\", "/", x)
+  # rm(x)
+  
+  # File Crawler
+  rootDir = "/Users/oli/Documents/workspace/wast/wast3/"
+  (files1=list.files(path =rootDir, pattern = "*.Rmd", full.names=TRUE, recursive = TRUE))
+  preamble= "/Users/oli/Documents/workspace/wast/Preamble/Preamble.Rmd"
+  
+  # An Example use case
+  options(useFancyQuotes = FALSE)
+  mergeRMD2(mergedFileName = "/Users/oli/tmp/All.Rmd",
+            files = files1, 
+            title = "A Collection of all Arbeitsblaetter", 
+            print.paths = TRUE, 
+            print.newpage = TRUE, 
+            preamble = preamble     
+  )
+  createAB(infile = "/Users/oli/tmp/All.Rmd")
 }
