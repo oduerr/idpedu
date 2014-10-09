@@ -17,9 +17,8 @@ output:
   }
 ```
 
-\begin{center} \textbf{\Large Arbeitsblatt 1} \end{center}
 
-## Aufgabe 1 (Eine typische Aufgabe: Arbeiten mit W'Dichten) 
+## Eine typische Aufgabe: Arbeiten mit W'Dichten
 Für die Zufallsvariable $X$ sei bekannt, dass sie wie $f_X(x) = e^{-\frac{2}{5} x}$ verteilt ist. Berechnen Sie die Wahrscheinlichkeit, dass die Zufallsvariable $X$ einen Wert zwischen 2 und 10 annimmt mit folgenden Verfahren:
 
 a)  Durch Simulation mittles der R-Funktion `rexp` (1000 Realisierungen) 
