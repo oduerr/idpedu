@@ -1,9 +1,14 @@
 #################################################
-#
-#' Creates 2 excersis sheets with and without solution from a r-makeuo file
-#' All the compiling happens in a temporary folder (also better then using dropbox or the like)
-#'
+# 
+#' Exercises out of Rmd-files.
+#' 
 #' @param infile the rmarkdown description file
+#' @param wast1 if TRUE a wast1 Arbeitsblatt will be build
+#' 
+#' @details Creates 2 excersis sheets from a r-makeup file. In this version the compiling happens in a 
+#' temporary folder. Which is benificial if you use e.g. dropbox.
+#' 
+#' 
 createAB <- function(infile, wast1 = FALSE) {
   library(rmarkdown)
   library(tools)
