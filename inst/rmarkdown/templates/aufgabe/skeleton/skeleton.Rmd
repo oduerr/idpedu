@@ -12,6 +12,9 @@ output:
   if (exists("baseDir") == FALSE){ #Nur falls von RStudio aufgerufen
     baseDir = getwd()
   }
+  ig <- function(name) {
+      return (paste0("\\includegraphics{", baseDir,"/", name, "}"))
+  }
 ```
 
 \begin{center} \textbf{\Large Arbeitsblatt 1} \end{center}
@@ -29,6 +32,10 @@ b)  Durch Integration des entsprechenden Integrals
 \lsg{
   $\int_2^{10} f_X(x) \; dx = \ldots = 2.5$
 }
+
+c) Einbinden einer Graphic: 
+`r ig('test.jpg')` 
+
 
 ## Aufgabe 2 (Blah Blah)
 ...
