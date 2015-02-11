@@ -9,7 +9,7 @@
 #' temporary folder. Which is benificial if you use e.g. dropbox.
 #' 
 #' 
-createAB <- function(infile, wast1 = FALSE) {
+createAB <- function(infile, wast1 = FALSE, wastNum=-1) {
   library(rmarkdown)
   library(tools)
   
@@ -19,10 +19,22 @@ createAB <- function(infile, wast1 = FALSE) {
     
   header_lsg =  system.file("rmarkdown/templates/aufgabe/skeleton/header_lsg.tex", package = "idpedu")
   header_nolsg =  system.file("rmarkdown/templates/aufgabe/resources/header_nolsg.tex", package = "idpedu")
-  if (wast1) {
-    before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img_wast1.tex", package = "idpedu")
+  if (wastNum < 0) {
+    if (wast1) {
+      before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img_wast1.tex", package = "idpedu")
+    } else {
+      before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img.tex", package = "idpedu")
+    }
   } else {
-    before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img.tex", package = "idpedu")
+    if (wastNum == 1) {
+      before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img_wast1.tex", package = "idpedu")
+    } else if (wastNum == 2) {
+      before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img_wast2.tex", package = "idpedu")
+    } else if (wastNum == 3) {
+      before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img.tex", package = "idpedu")
+    } else if (wastNum == 4) {
+      before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img_stop.tex", package = "idpedu")
+    }
   }
   header_nolsg =  system.file("rmarkdown/templates/aufgabe/resources/header_nolsg.tex", package = "idpedu")
   img = system.file("rmarkdown/templates/aufgabe/resources/logo.jpg", package = "idpedu")

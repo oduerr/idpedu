@@ -13,7 +13,7 @@ if (FALSE) {
            printpaths = FALSE,
            mergedFileName = "ab1.Rmd"
            )
-  createAB(infile = "/Users/oli/Dropbox/__ZHAW/WaST3/__Alle_HS14/__Ich__Wast3.HS14/Woche1/ab1.Rmd")
+  createAB(infile = "/Users/oli/Dropbox/__ZHAW/WaST3/__Alle_HS14/__Ich__Wast3.HS14/Woche1/ab1.Rmd", wastNum = 2)
   rmdFiles <- list.files(path = "/Users/oli/Documents/workspace/wast/wast3/", pattern = "*.Rmd", recursive = TRUE)
   
   
