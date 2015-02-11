@@ -66,6 +66,14 @@ createAB <- function(infile, wast1 = FALSE, wastNum=-1) {
     changedDir = TRUE
     output_file_base = basename(file_path_sans_ext(infile))
     
+    # Creating the non-lsg file
+    lsg <- FALSE
+    inc = includes(before_body = before_body_img, in_header = header_nolsg)
+    output_file = paste0(output_file_base, "_nolsg.pdf")
+    render(input = basename(infile), pdf_document(includes = inc), output_file = output_file , encoding = "UTF-8")
+    toRemove = append(toRemove, output_file)
+    file.copy(output_file, to=dirname(infile), overwrite = TRUE)
+
     # Creating the lsg-file
     inc = includes(before_body = basename(before_body_img), in_header = basename(header_lsg))
     lsg <- TRUE
@@ -75,13 +83,6 @@ createAB <- function(infile, wast1 = FALSE, wastNum=-1) {
     dirname(infile)
     file.copy(output_file, to=dirname(infile), overwrite = TRUE)
     
-    # Creating the non-lsg file
-    lsg <- FALSE
-    inc = includes(before_body = before_body_img, in_header = header_nolsg)
-    output_file = paste0(output_file_base, "_nolsg.pdf")
-    render(input = basename(infile), pdf_document(includes = inc), output_file = output_file , encoding = "UTF-8")
-    toRemove = append(toRemove, output_file)
-    file.copy(output_file, to=dirname(infile), overwrite = TRUE)
   }
   ,finally = {
     #TODO delete old files
