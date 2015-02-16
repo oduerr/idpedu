@@ -19,24 +19,16 @@ createAnkreuzBlatt <- function(infile, output_file, header, name) {
     anz.vorgerechet <- df[,2]
     library(xtable)    
     library(rmarkdown)
-    str = paste(
-      "\\documentclass[a4paper]{article}",
-      "\\usepackage[a4paper]{geometry}",
-      "\\usepackage[utf8]{inputenc}",
-      "\\usepackage{rotating}",
-      "\\begin{document}",
-      name.title, 
-      "<<echo=FALSE, eval=TRUE, results = \"asis\">>=",
-      "options(xtable.comment = FALSE)",
-      "df.out <- data.frame(matrix(nrow = length(names), ncol = length(header))) ",
-      "colnames(df.out) <- header",
-      "rownames(df.out) <- names",
-      "df.out$anz.vorgerechet <- anz.vorgerechet",
-      "tab <- xtable(df.out, align = rep('|l', ncol(df.out)+1))",
-      "print((tab), rotate.colnames=TRUE, hline.after=-1:nrow(df.out), scalebox=1.2)",
-      "@",
-      "\\end{document}"
-      , sep='\n')
+    str = paste("\\documentclass[a4paper]{article}", "\\usepackage[a4paper]{geometry}", 
+                "\\usepackage[utf8]{inputenc}", "\\usepackage{rotating}", 
+                "\\setlength{\\voffset}{0.5cm}", "\\setlength{\\headheight}{0.01cm}",
+                "\\setlength{\\textheight}{30cm}",
+                "\\begin{document}", name.title, "<<echo=FALSE, eval=TRUE, results = \"asis\">>=", 
+                "options(xtable.comment = FALSE)", "df.out <- data.frame(matrix(nrow = length(names), ncol = length(header))) ", 
+                "colnames(df.out) <- header", "rownames(df.out) <- names", 
+                "df.out$anz.vorgerechet <- anz.vorgerechet", "tab <- xtable(df.out, align = rep('|l', ncol(df.out)+1))", 
+                "print((tab), rotate.colnames=TRUE, hline.after=-1:nrow(df.out), scalebox=1.2)", 
+                "@", "\\end{document}", sep = "\n")
     cat(str, file = "dumm.Rnw")
     output = "dumm.tex"
     library('knitr')
