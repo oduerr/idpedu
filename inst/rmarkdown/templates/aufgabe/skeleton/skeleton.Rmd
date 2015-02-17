@@ -12,8 +12,8 @@ output:
   if (exists("baseDir") == FALSE){ #Nur falls von RStudio aufgerufen
     baseDir = getwd()
   }
-  ig <- function(name) {
-      return (paste0("\\includegraphics{", baseDir,"/", name, "}"))
+  ig <- function(name, scale = 1) {
+     return (paste0("\\includegraphics[ scale =", scale,"]{", baseDir,"/", name, "}"))
   }
 ```
 
