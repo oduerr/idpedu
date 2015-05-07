@@ -19,6 +19,7 @@ createAB <- function(infile, wast1 = FALSE, wastNum=-1) {
     
   header_lsg =  system.file("rmarkdown/templates/aufgabe/skeleton/header_lsg.tex", package = "idpedu")
   header_nolsg =  system.file("rmarkdown/templates/aufgabe/resources/header_nolsg.tex", package = "idpedu")
+  img = system.file("rmarkdown/templates/aufgabe/resources/logo.jpg", package = "idpedu")
   if (wastNum < 0) {
     if (wast1) {
       before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img_wast1.tex", package = "idpedu")
@@ -34,10 +35,12 @@ createAB <- function(infile, wast1 = FALSE, wastNum=-1) {
       before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img.tex", package = "idpedu")
     } else if (wastNum == 4) {
       before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img_stop.tex", package = "idpedu")
+    } else if (wastNum == 10) {
+      before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img_cas.tex", package = "idpedu")
+      img = system.file("rmarkdown/templates/aufgabe/resources/logo_cas.png", package = "idpedu")
     }
   }
   header_nolsg =  system.file("rmarkdown/templates/aufgabe/resources/header_nolsg.tex", package = "idpedu")
-  img = system.file("rmarkdown/templates/aufgabe/resources/logo.jpg", package = "idpedu")
   template <-  system.file(
     "rmarkdown/templates/aufgabe/resources/template.tex", 
     package = "idpedu"
