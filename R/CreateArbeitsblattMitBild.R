@@ -35,6 +35,8 @@ createAB <- function(infile, wast1 = FALSE, wastNum=-1) {
       before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img.tex", package = "idpedu")
     } else if (wastNum == 4) {
       before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img_stop.tex", package = "idpedu")
+    } else if (wastNum == 5) {
+      before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img_stdm.tex", package = "idpedu")
     } else if (wastNum == 9) {
       before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img_ast.tex", package = "idpedu")
     } else if (wastNum == 10) {
