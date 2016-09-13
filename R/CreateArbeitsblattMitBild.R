@@ -44,6 +44,8 @@ createAB <- function(infile, wast1 = FALSE, wastNum=-1) {
     } else if (wastNum == 10) {
       before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img_cas.tex", package = "idpedu")
       img = system.file("rmarkdown/templates/aufgabe/resources/logo_cas.png", package = "idpedu")
+    } else if(wastNum == 11){
+      before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img_qs_asp_spc.tex", package = "idpedu")
     }
   }
   header_nolsg =  system.file("rmarkdown/templates/aufgabe/resources/header_nolsg.tex", package = "idpedu")
