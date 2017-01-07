@@ -111,11 +111,11 @@ createAB <- function(infile, wast1 = FALSE, wastNum=-1) {
 }
 
 
-##################################################
+#################################################
 # Cleaning the headers
 sanitize_headings <- function(filename) {
-  text<-readLines(filename,warn=F) 
-  lin<-grep("##",text)
+  text<-readLines(filename,warn=F)
+  lin<-grep("^##[^#]",text)
   n<-length(lin)/2
   for (i in 1:n){
     line.aufg<-lin[2*(i-1)+1]
