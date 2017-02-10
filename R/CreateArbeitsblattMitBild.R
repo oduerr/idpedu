@@ -50,7 +50,7 @@ createAB <- function(infile, wast1 = FALSE, wastNum=-1) {
       before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img_qs_asp_spc_pruefung.tex", package = "idpedu")
     }
     else if(wastNum == 13){
-      before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img_cas_sm.tex", package = "idpedu")
+      before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img_cas_stat_dod.tex", package = "idpedu")
     }
   }
   header_nolsg =  system.file("rmarkdown/templates/aufgabe/resources/header_nolsg.tex", package = "idpedu")
