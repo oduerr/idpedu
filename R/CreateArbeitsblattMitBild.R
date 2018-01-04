@@ -52,6 +52,9 @@ createAB <- function(infile, wast1 = FALSE, wastNum=-1) {
     else if(wastNum == 13){
       before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img_cas_stat_mod.tex", package = "idpedu")
     }
+    else if(wastNum == 14){
+      before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img_cas_da.tex", package = "idpedu")
+    }
   }
   header_nolsg =  system.file("rmarkdown/templates/aufgabe/resources/header_nolsg.tex", package = "idpedu")
   template <-  system.file(
