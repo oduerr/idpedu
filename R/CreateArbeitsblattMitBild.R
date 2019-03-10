@@ -61,6 +61,9 @@ createAB <- function(infile, wast1 = FALSE, wastNum=-1) {
     }else if(wastNum == 22){
       before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img_htwg_stat.tex", package = "idpedu")
       img = system.file("rmarkdown/templates/aufgabe/resources/htwg_logo.png", package = "idpedu")
+    } else if(wastNum == 23){
+      before_body_img = system.file("rmarkdown/templates/aufgabe/resources/before_body_img_htwg_dataanalytics.tex", package = "idpedu")
+      img = system.file("rmarkdown/templates/aufgabe/resources/htwg_logo.png", package = "idpedu")
     }
   }
   header_nolsg =  system.file("rmarkdown/templates/aufgabe/resources/header_nolsg.tex", package = "idpedu")
