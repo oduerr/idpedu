@@ -78,7 +78,7 @@ mergeRMD2 = function(mergedFileName = "book.Rmd",title=".", files, preamble, pri
   text.input = vector("character", 1)
   
   # Introduce Aufgabe names
-  task.names=paste0("##Aufgabe ", 1:length(files))
+  task.names=paste0("## Aufgabe ", 1:length(files), ": ")
   
   for(i in 1:length(files)){
     
