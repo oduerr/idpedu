@@ -62,7 +62,7 @@
 #'  }
 
 
-mergeRMD2 = function(mergedFileName = "book.Rmd",title=".", files, preamble, print.paths=FALSE, print.newpage=TRUE) {
+mergeRMD2 = function(mergedFileName = "book.Rmd",title=".", files, preamble, print.paths=FALSE, print.newpage=TRUE, print.names =TRUE) {
   
   dir=dirname(mergedFileName)
   
@@ -78,7 +78,9 @@ mergeRMD2 = function(mergedFileName = "book.Rmd",title=".", files, preamble, pri
   text.input = vector("character", 1)
   
   # Introduce Aufgabe names
-  task.names=paste0("## Aufgabe ", 1:length(files), ": ")
+  if (print.names){
+    task.names=paste0("## Aufgabe ", 1:length(files), ": ")
+  }
   
   for(i in 1:length(files)){
     
@@ -95,9 +97,12 @@ mergeRMD2 = function(mergedFileName = "book.Rmd",title=".", files, preamble, pri
     cell.insert=character(length=1)
     
     # Print Aufgabe Names
-    j=1
-    
-    cell.insert[j]=task.names[i]
+    if (print.names){
+      j=1
+      cell.insert[j]=task.names[i]
+    } else{
+      j = 0
+    }
     
     cell.insert[j+1]="```{r, echo=FALSE, eval=TRUE,comment=NA}" # comment=NA is to hide ## in knitr output 
     
