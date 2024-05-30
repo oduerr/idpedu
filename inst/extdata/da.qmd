@@ -1,0 +1,37 @@
+---
+output:
+  pdf_document:
+    includes:
+      in_header: preamble.tex
+  html_document: default
+params:
+  lsg: TRUE
+---
+
+```{r, echo=FALSE, results='asis'}
+if (knitr::is_latex_output()) {
+ cat('
+\\noindent
+\\begin{minipage}[t]{0.4\\textwidth}
+\\includegraphics[width=\\linewidth]{htwg_logo.png}
+\\end{minipage}
+\\hfill
+\\begin{minipage}[t]{0.6\\textwidth}\\raggedleft
+\\textbf{\\Large Data Analysis}
+\\end{minipage}
+')
+} else {
+cat('
+<img src="htwg_logo.png" style="float:left; width:40%;" />
+<div style="float:right; width:60%; text-align:right;">
+  <strong style="font-size:large;">Data Analysis</strong>
+</div>
+<div style="clear:both;"></div>
+  ')
+}
+```
+
+
+
+
+

@@ -74,6 +74,8 @@ create_workbook <- function(
   # Copy the task files to the temporary directory
   copy_tasks(tasks, temp_dir)
   
+
+
   # Read and prepare the header file content
   header_path <- file.path(temp_dir, header_file)
   header_content <- readLines(header_path)
@@ -123,6 +125,7 @@ create_workbook <- function(
   
   message("Workbook created and saved in directory '", output_dir, "'.")
 }
+
 
 if (FALSE){
   tasks = c("~/Documents/GitHub/da/lab/lr_1_MH_vs_Stan/MH_Stan.qmd") # list of tasks (can also be one)
