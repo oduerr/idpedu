@@ -20,7 +20,7 @@ params:
 ### a) Loading
 Load the dataset. You might use
 
-```{r, echo=TRUE, eval=TRUE}
+```{r l1, echo=TRUE, eval=TRUE}
 df = read.csv('https://raw.githubusercontent.com/tensorchiefs/data/main/data/sbp.csv')
 ```
 
@@ -40,6 +40,6 @@ coef(model)
 ```
 
 
-```{echo=FALSE, eval=lsg, asis=TRUE}
+```{echo=lsg, eval=FALSE, asis=TRUE}
 Reading from the output above, we can see that the blood pressure increases by $a=1.105$ mmHg per year.
 ```
