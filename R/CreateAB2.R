@@ -38,12 +38,17 @@ remove_yaml_header <- function(lines) {
 #' Create a workbook by merging QMD files and rendering them with Quarto
 #' 
 #' @param tasks A vector of task file names
+#' @param title The title of the workbook
+#' @param fname The base file name for the final documents
 #' @param header_file The header file name
 #' @param output_format A vector of output formats ("html" and/or "pdf")
 #' @param output_dir The directory where the final documents will be saved
+#' @param lsg_param The parameter to control the visibility of solutions
+#' @param selfcontained A boolean to determine if the output should be self-contained
 #' @export
 create_workbook <- function(
     tasks = c("aufgabe1.qmd", "aufgabe2.qmd"), 
+    title = title,
     fname='09_bayes3', 
     header_file = "ab.qmd", 
     output_format = c("html", "pdf"), 
@@ -69,16 +74,23 @@ create_workbook <- function(
   # Copy the task files to the temporary directory
   copy_tasks(tasks, temp_dir)
   
-  # Render the header file with Quarto
+
+
+  # Read and prepare the header file content
   header_path <- file.path(temp_dir, header_file)
+  header_content <- readLines(header_path)
+  title_line <- paste0("# ", title)
   
-  # Combine the header file with the tasks but remove the YAML header
+  # Combine the title, header file content, and tasks, removing YAML headers
   merged_qmd_path <- file.path(temp_dir, "merged.qmd")
-  cat(readLines(header_path), sep = "\n", file = merged_qmd_path)
+  cat(header_content, sep = "\n", file = merged_qmd_path)
   cat("\n", file = merged_qmd_path, append = TRUE)
+  cat(title_line, sep = "\n", file = merged_qmd_path, append = TRUE)
+  cat("\n", file = merged_qmd_path, append = TRUE)
+  
   for (task in tasks) {
     task_lines <- readLines(file.path(temp_dir, basename(task)))
-    #task_lines <- remove_yaml_header(task_lines)
+    task_lines <- remove_yaml_header(task_lines)
     cat(task_lines, sep = "\n", file = merged_qmd_path, append = TRUE)
     cat("\n", file = merged_qmd_path, append = TRUE)
   }
@@ -113,4 +125,14 @@ create_workbook <- function(
   
   message("Workbook created and saved in directory '", output_dir, "'.")
 }
-create_workbook(tasks = c("~/Documents/GitHub/da/lab/lr_1_MH_vs_Stan/MH_Stan.qmd"), header_file = "da.qmd", output_format = c("html", "pdf"), output_dir = "dumm32")
+
+
+if (FALSE){
+  tasks = c("~/Documents/GitHub/da/lab/lr_1_MH_vs_Stan/MH_Stan.qmd") # list of tasks (can also be one)
+  title = "Bayesian Inference" # Title of the worksheet
+  # Stays the same for all worksheets for a given course
+  header_file = "da.qmd" # To change / add go into repository inst/extdata
+  fname='09_bayes3'
+  output_format = c("html", "pdf") # Output format only html and pdf supported at the moment 
+  create_workbook(tasks=tasks, title = title, fname=fname,  header_file=header_file, output_format=output_format)
+}
