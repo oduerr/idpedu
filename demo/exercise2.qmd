@@ -13,14 +13,14 @@ params:
 ### a) Loading
 Load the dataset. You might use
 
-```{r loading, echo=TRUE, eval=TRUE}
+```{r, echo=TRUE, eval=TRUE}
 df = read.csv('https://raw.githubusercontent.com/tensorchiefs/data/main/data/sbp.csv')
 ```
 
 ### b) Average age
 Calculate the average age of the participants.
 
-```{r age, echo=params$lsg, eval=params$lsg}
+```{r, echo=params$lsg, eval=params$lsg}
 mean(df$x)
 ```
 

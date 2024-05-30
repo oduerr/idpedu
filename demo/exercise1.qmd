@@ -20,21 +20,21 @@ params:
 ### a) Loading
 Load the dataset. You might use
 
-```{r loading, echo=TRUE, eval=TRUE}
+```{r, echo=TRUE, eval=TRUE}
 df = read.csv('https://raw.githubusercontent.com/tensorchiefs/data/main/data/sbp.csv')
 ```
 
 ### b) Scatterplot
 Create a plot of the data, the x-axis should be `age` and the y-axis should be `sbp`.
 
-```{r scatterplot, echo=lsg, eval=lsg}
+```{r, echo=lsg, eval=lsg}
 plot(df$x, df$y, xlab = "age", ylab = "sbp")
 ```
 
 ### c) Linear regression
 Fit a linear regression model to the data. How much does the blood pressure increase per year?
 
-```{r linear_regression, echo=lsg, eval=lsg}
+```{r, echo=lsg, eval=lsg}
 model = lm(y ~ x, data = df)
 coef(model)
 ```
