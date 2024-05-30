@@ -4,11 +4,17 @@ output:
     highlight: pygments
   html_document: 
     default
+filters:
+  - solution.lua
 params:
   lsg: TRUE
 ---
 
 ## Too easy?
+
+```{solution}
+The integral $a^4$ Hallo  $begin:math:text$x^2$end:math:text$ is $begin:math:text$\\frac{x^3}{3} + C$end:math:text$.
+```
 
 ### a) Loading
 Load the dataset. You might use
