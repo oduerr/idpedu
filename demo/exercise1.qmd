@@ -1,0 +1,45 @@
+---
+output:
+  pdf_document:
+    highlight: pygments
+  html_document: 
+    default
+params:
+  lsg: TRUE
+---
+
+```{r, echo=FALSE, eval=TRUE, message=FALSE}
+  #The variable lsg is used to control the visibility of the solutions and needs to be set
+  if (exists("lsg") == FALSE){  
+    lsg <- params$lsg
+  }
+```
+
+## 1-D Linear regression 
+
+### a) Loading
+Load the dataset. You might use
+
+```{r loading, echo=TRUE, eval=TRUE}
+df = read.csv('https://raw.githubusercontent.com/tensorchiefs/data/main/data/sbp.csv')
+```
+
+### b) Scatterplot
+Create a plot of the data, the x-axis should be `age` and the y-axis should be `sbp`.
+
+```{r scatterplot, echo=lsg, eval=lsg}
+plot(df$x, df$y, xlab = "age", ylab = "sbp")
+```
+
+### c) Linear regression
+Fit a linear regression model to the data. How much does the blood pressure increase per year?
+
+```{r linear_regression, echo=lsg, eval=lsg}
+model = lm(y ~ x, data = df)
+coef(model)
+```
+
+
+```{echo=FALSE, eval=lsg, asis=TRUE}
+Reading from the output above, we can see that the blood pressure increases by $a=1.105$ mmHg per year.
+```
