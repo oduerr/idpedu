@@ -6,8 +6,9 @@ Usefull tools for teaching statistics.
 ## To install the packages
 
 ```r
-  library(devtools)  # You might need to install devtools first
-  install_github("oduerr/idpedu") 
+  install.packages("https://github.com/oduerr/idpedu/releases/download/quarto_1st/idpedu_0.1.tar.gz", repos = NULL, type = "source")
+  #library(devtools)  # You might need to install devtools first
+  #install_github("oduerr/idpedu") 
   library(idpedu)
 ```
 
