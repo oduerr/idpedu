@@ -8,13 +8,21 @@ copy_extdata <- function(temp_dir) {
 
 #' Copy the task files to the temporary directory
 #' 
-#' @param tasks A vector of task file names
+#' @param tasks A vector of task file names or URLs
 #' @param temp_dir The temporary directory to which the files will be copied
 copy_tasks <- function(tasks, temp_dir) {
   for (task in tasks) {
-    file.copy(task, file.path(temp_dir, basename(task)), overwrite = TRUE)
+    if (grepl("^https?://", task)) {
+      # If the task is a URL, download it
+      message("Downloading task from URL: '", task, "'.")
+      download.file(task, destfile = file.path(temp_dir, basename(task)), mode = "wb")
+    } else {
+      # Otherwise, copy it from the local file system
+      file.copy(task, file.path(temp_dir, basename(task)), overwrite = TRUE)
+    }
   }
 }
+
 
 #' Remove YAML header from a QMD file content
 #' 
@@ -43,9 +51,25 @@ remove_yaml_header <- function(lines) {
 #' @param header_file The header file name
 #' @param output_format A vector of output formats ("html" and/or "pdf")
 #' @param output_dir The directory where the final documents will be saved
-#' @param lsg_param The parameter to control the visibility of solutions
 #' @param selfcontained A boolean to determine if the output should be self-contained
 #' @export
+#' 
+#' @examples:
+#' 
+#' tasks = c(
+#'  "https://raw.githubusercontent.com/oduerr/idpedu/master/demo/exercise1.qmd",
+#'  "https://raw.githubusercontent.com/oduerr/idpedu/master/demo/exercise2.qmd"
+#' ) # list of tasks (can also be a single task)
+#'
+#'
+#'title = "Week 1 (Simple Stuff)" # Title of the worksheet
+#'fname='week1' # Name of the file(s) which are produces
+#'
+# Stays the same for all worksheets for a given course
+#'header_file = "da.qmd" # To change / add go into repository inst/extdata
+#' create_workbook(tasks=tasks, title = title, fname=fname,  header_file=header_file)
+#' 
+#' 
 create_workbook <- function(
     tasks = c("aufgabe1.qmd", "aufgabe2.qmd"), 
     title = title,

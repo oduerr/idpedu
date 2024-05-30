@@ -4,7 +4,7 @@
 #'
 #' @param infile the rmarkdown description file
 #
-#
+# @export
 #
 createAB.old <- function(infile) {
   library(rmarkdown)
