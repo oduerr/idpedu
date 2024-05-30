@@ -4,6 +4,8 @@ output:
     includes:
       in_header: preamble.tex
   html_document: default
+params:
+  lsg: TRUE
 ---
 
 ```{r, echo=FALSE, results='asis'}
