@@ -17,15 +17,14 @@ if (knitr::is_latex_output()) {
 \\end{minipage}
 \\hfill
 \\begin{minipage}[t]{0.6\\textwidth}\\raggedleft
-\\textbf{Statistik und Wahrscheinlichkeitsrechnung}
+\\textbf{\\Large Statistik und Wahrscheinlichkeitsrechnung}
 \\end{minipage}
 ')
 } else {
 cat('
 <img src="htwg_logo.png" style="float:left; width:40%;" />
 <div style="float:right; width:60%; text-align:right;">
-  <strong style="font-size:large;">Statistik und Wahrscheinlichkeitsrechnung
-</strong>
+  <strong style="font-size:large;">Statistik und Wahrscheinlichkeitsrechnung</strong>
 </div>
 <div style="clear:both;"></div>
   ')
