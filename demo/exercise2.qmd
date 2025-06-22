@@ -14,7 +14,8 @@ params:
 Load the dataset. You might use
 
 ```{r, echo=TRUE, eval=TRUE}
-df = read.csv('https://raw.githubusercontent.com/tensorchiefs/data/main/data/sbp.csv')
+#df = read.csv('https://raw.githubusercontent.com/tensorchiefs/data/main/data/sbp.csv')
+df <- edudat::load_data("sbp.csv")
 ```
 
 ### b) Average age

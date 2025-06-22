@@ -22,7 +22,7 @@ The new command `create_workbook` renders html and pdf files from a list of task
    "/Users/oli/Documents/GitHub/idpedu/demo/exercise2.qmd"
   ) # list of tasks (can also be a single task)
   
-  ### Remote Files
+  ### Remote Files (alternatively)
   tasks = c(
    "https://raw.githubusercontent.com/oduerr/idpedu/master/demo/exercise1.qmd",
    "https://raw.githubusercontent.com/oduerr/idpedu/master/demo/exercise2.qmd"
@@ -54,6 +54,8 @@ The html files are rendered to be selfcontained. This means that the images are 
 The header file is a markdown file which is included at the beginning of the worksheet. Add a custom qmd-file like `custom.qmd` in the inst/extdata folder exchange `header_file = "custom.qmd"`
 
 
+## Tips for developing the package:
+You can use `devtools::load_all()` to visualize chances.
 
 
 
