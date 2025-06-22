@@ -6,9 +6,9 @@ Usefull tools for teaching statistics.
 ## To install the packages
 
 ```r
-  install.packages("https://github.com/oduerr/idpedu/releases/download/quarto_1st/idpedu_0.1.tar.gz", repos = NULL, type = "source")
-  #library(devtools)  # You might need to install devtools first
-  #install_github("oduerr/idpedu") 
+  #install.packages("https://github.com/oduerr/idpedu/releases/download/quarto_1st/idpedu_0.1.tar.gz", repos = NULL, type = "source")
+  library(devtools)  # You might need to install devtools first
+  install_github("oduerr/idpedu") 
   library(idpedu)
 ```
 
@@ -16,6 +16,8 @@ Usefull tools for teaching statistics.
 The new command `create_workbook` renders html and pdf files from a list of tasks. The tasks `exercise1.qmd`, `exercise2.qmd` can be found at <https://github.com/oduerr/idpedu/tree/master/demo> along with the rendered html and pdf files.
 
 ```r
+  
+  
   ### Local Files
   tasks = c(
    "/Users/oli/Documents/GitHub/idpedu/demo/exercise1.qmd",
@@ -55,7 +57,7 @@ The header file is a markdown file which is included at the beginning of the wor
 
 
 ## Tips for developing the package:
-You can use `devtools::load_all()` to visualize chances.
+You can use `devtools::load_all()` to load the chances.
 
 
 
