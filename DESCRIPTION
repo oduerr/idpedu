@@ -1,7 +1,7 @@
 Package: idpedu
 Type: Package
 Title: Utilities for teaching statistics with R 
-Version: 0.101
+Version: 0.10142
 Date: 2025-6-22
 Author: oliver duerr
 Maintainer: Who to complain to <yourfault@somewhere.net>

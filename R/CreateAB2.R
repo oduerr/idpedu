@@ -54,8 +54,6 @@ remove_yaml_header <- function(lines) {
 #' @param selfcontained A boolean to determine if the output should be self-contained
 #' @param verbose Logical flag to print progress messages during rendering
 #' @param execute_dir Optional path used as the execution directory for Quarto.
-#'   If provided, relative file references inside tasks are resolved against this path.
-#'   Defaults to `getOption("idpedu.execute_dir")`.
 #' @export
 #' @examples NULL
 create_workbook <- function(
@@ -67,7 +65,7 @@ create_workbook <- function(
     output_dir = ".", 
     selfcontained = TRUE,
     verbose = TRUE,
-    execute_dir = getOption("idpedu.execute_dir", default = NULL)
+    execute_dir = "project"
     ){
   
   # Ensure the output directory exists
@@ -88,6 +86,15 @@ create_workbook <- function(
   # Copy the task files to the temporary directory
   copy_tasks(tasks, temp_dir)
   
+  # Guessing the project directory
+  if (execute_dir == "project") {
+  execute_dir <- rprojroot::find_root(
+      rprojroot::has_file_pattern('\\.Rproj$') |
+        rprojroot::has_file('_quarto.yml') |
+        rprojroot::is_r_package
+    )
+  }
+  if (verbose) message("Project directory (guessed): '", execute_dir, "'.")
 
 
   # Read and prepare the header file content
