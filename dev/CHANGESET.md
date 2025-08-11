@@ -1,6 +1,6 @@
 idpedu cleanup — Changeset
 
-Scope: Tasks 0–1 completed; Tasks 2–3 pending.
+Scope: Tasks 0–3 completed.
 
 What was added
 - Workflow tests under `tests/testthat/test-workflows.R` covering:
@@ -18,17 +18,15 @@ What was changed
 - Tests now generate human-inspection artifacts in `tests/artifacts/` and keep HTML snapshot stable via normalization.
 
 What was removed
-- Nothing removed yet. Cleanup will be performed in Task 2 after confirming coverage and safety.
-
-What will be deprecated/removed (planned in Task 2)
-- Legacy Rmd/LaTeX pipeline files not used by `create_workbook()` workflows, e.g.:
+- Legacy Rmd/LaTeX pipeline and utilities not used by `create_workbook()` workflows:
   - `R/CreateArbeitsblatt.R` (createAB.old)
   - `R/CreateArbeitsblattMitBild.R` (createAB)
-  - `R/MergeRMD.R` (mergeRMD2)
-  - `R/MergeRMD_tolk.R` (mergeRMDFiles)
-  - `R/PraktikumsUtils.R` utilities (maybe deprecate instead of delete if still needed)
-  - `R/Testing.R`
-  - `inst/rmarkdown/templates/aufgabe/**`
+  - `R/MergeRMD.R` (mergeRMDFiles)
+  - `R/MergeRMD_tolk.R` (mergeRMD2)
+  - `R/PraktikumsUtils.R` (createAnkreuzBlatt, randomPick)
+
+What will be deprecated/removed (future)
+- Remaining legacy templates under `inst/rmarkdown/templates/aufgabe/**` if confirmed unused.
 
 Notes
 - All three canonical workflows produce expected outputs and are protected by tests.

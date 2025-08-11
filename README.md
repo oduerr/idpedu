@@ -12,8 +12,13 @@ Usefull tools for teaching statistics.
   library(idpedu)
 ```
 
-## Compile an worksheet.
-The new command `create_workbook` renders html and pdf files from a list of tasks. The tasks `exercise1.qmd`, `exercise2.qmd` can be found at <https://github.com/oduerr/idpedu/tree/master/demo> along with the rendered html and pdf files.
+## Compile a worksheet
+The new command `create_workbook` renders HTML and PDF files from a list of tasks. The tasks `exercise1.qmd`, `exercise2.qmd` can be found at:
+
+- Demo tasks: https://github.com/oduerr/idpedu/tree/master/demo
+- Raw links for remote usage:
+  - https://raw.githubusercontent.com/oduerr/idpedu/master/demo/exercise1.qmd
+  - https://raw.githubusercontent.com/oduerr/idpedu/master/demo/exercise2.qmd
 
 ```r
   

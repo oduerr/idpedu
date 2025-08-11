@@ -68,6 +68,7 @@ All three must produce identical outputs (format, filenames, and content) after 
    - What was kept.
    - Any deprecations.
 3. Update `NEWS.md`.
+5. Add a link to exercise1.qmd and exercise2.qmd in the Readme and polish it (no extensive changes)
 4. Verify that the number of R files and total repo size decreased.
 
 ---
