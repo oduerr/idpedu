@@ -38,7 +38,7 @@ All three must produce identical outputs (format, filenames, and content) after 
 2. Build a **dependency map** starting from `create_workbook()` to identify required functions and files.
 3. List all functions/files not reachable from the three workflows.
 4. Propose any additional minimal tests needed to protect current behavior.
-5. Output only the plan for review — **no code changes yet**.
+5. Output only the plan for review — **no code changes yet** and save it as `dev/Legacy_CHANGESET.md`
 
 ---
 

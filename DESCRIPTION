@@ -5,12 +5,13 @@ Version: 0.101
 Date: 2025-6-22
 Author: oliver duerr
 Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
+Description: Create combined HTML and PDF worksheets from Quarto '.qmd' tasks,
+    with and without solutions, using a single high-level function.
 License: LGPL
 Depends: R (>= 3.0)
-RoxygenNote: 7.2.3
-Suggests: 
+Suggests:
     testthat (>= 3.0.0),
     pdftools
 Config/testthat/edition: 3
+RoxygenNote: 7.2.3
 
