@@ -53,6 +53,9 @@ remove_yaml_header <- function(lines) {
 #' @param output_dir The directory where the final documents will be saved
 #' @param selfcontained A boolean to determine if the output should be self-contained
 #' @param verbose Logical flag to print progress messages during rendering
+#' @param execute_dir Optional path used as the execution directory for Quarto.
+#'   If provided, relative file references inside tasks are resolved against this path.
+#'   Defaults to `getOption("idpedu.execute_dir")`.
 #' @export
 #' @examples NULL
 create_workbook <- function(
@@ -63,7 +66,8 @@ create_workbook <- function(
     output_format = c("html", "pdf"), 
     output_dir = ".", 
     selfcontained = TRUE,
-    verbose = TRUE
+    verbose = TRUE,
+    execute_dir = getOption("idpedu.execute_dir", default = NULL)
     ){
   
   # Ensure the output directory exists
@@ -108,11 +112,15 @@ create_workbook <- function(
   # Render the merged QMD document with Quarto, passing the parameter for lsg
   for (lsg in c(FALSE, TRUE)){
     for (format in output_format) {
-      if (format == "html" && selfcontained) {
-        quarto_render_cmd <- sprintf("quarto render %s --to %s -P lsg=%s --self-contained", merged_qmd_path, format, ifelse(lsg, "true", "false"))
-      } else {
-        quarto_render_cmd <- sprintf("quarto render %s --to %s -P lsg=%s", merged_qmd_path, format, ifelse(lsg, "true", "false"))
-      }
+      # Build Quarto command with optional execute-dir
+      args <- c(
+        "quarto", "render", merged_qmd_path,
+        "--to", format,
+        "-P", sprintf("lsg=%s", ifelse(lsg, "true", "false"))
+      )
+      if (format == "html" && selfcontained) args <- c(args, "--self-contained")
+      if (!is.null(execute_dir)) args <- c(args, "--execute-dir", execute_dir)
+      quarto_render_cmd <- paste(shQuote(args), collapse = " ")
       if (verbose) message("Running command: '", quarto_render_cmd, "'.")
       res <- system(quarto_render_cmd, intern = TRUE, ignore.stderr = FALSE, ignore.stdout = FALSE)
       if (!is.null(attr(res, "status")) && attr(res, "status") != 0) {
