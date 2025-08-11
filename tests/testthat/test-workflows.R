@@ -2,8 +2,6 @@ test_that("Local → HTML workflow works and normalizes output", {
   skip_on_cran()
   skip_if_no_quarto()
 
-  prepare_artifacts_dir()
-
   tmp_out <- file.path(tempdir(), paste0("idpedu-test-", as.integer(runif(1, 1, 1e9))))
   dir.create(tmp_out, recursive = TRUE, showWarnings = FALSE)
   on.exit(unlink(tmp_out, recursive = TRUE, force = TRUE), add = TRUE)
@@ -30,10 +28,9 @@ test_that("Local → HTML workflow works and normalizes output", {
   expect_true(file.exists(html_file))
 
   # Copy artifacts for manual inspection
-  copy_to_artifacts(c(
-    html_file,
-    file.path(tmp_out, paste0(fname, "_lsg.html"))
-  ))
+  html_lsg <- file.path(tmp_out, paste0(fname, "_lsg.html"))
+  expect_true(file.exists(html_lsg))
+  copy_to_artifacts(c(html_file, html_lsg))
 
   # Normalize volatile paths and times in HTML
   html <- readLines(html_file, warn = FALSE)
@@ -53,8 +50,6 @@ test_that("Local → PDF workflow works (da.qmd)", {
   skip_if_no_quarto()
   skip_if_no_pdflatex()
   testthat::skip_if_not_installed("pdftools")
-
-  prepare_artifacts_dir()
 
   tmp_out <- file.path(tempdir(), paste0("idpedu-test-", as.integer(runif(1, 1, 1e9))))
   dir.create(tmp_out, recursive = TRUE, showWarnings = FALSE)
@@ -81,10 +76,9 @@ test_that("Local → PDF workflow works (da.qmd)", {
   expect_true(file.exists(pdf_file))
 
   # Copy artifacts for manual inspection
-  copy_to_artifacts(c(
-    pdf_file,
-    file.path(tmp_out, paste0(fname, "_lsg.pdf"))
-  ))
+  pdf_lsg <- file.path(tmp_out, paste0(fname, "_lsg.pdf"))
+  expect_true(file.exists(pdf_lsg))
+  copy_to_artifacts(c(pdf_file, pdf_lsg))
 
   txt <- pdftools::pdf_text(pdf_file)
   # Basic sanity: at least 1 page and some text
@@ -97,8 +91,6 @@ test_that("Remote → PDF workflow works (stat.qmd)", {
   skip_if_no_quarto()
   skip_if_no_pdflatex()
   testthat::skip_if_not_installed("pdftools")
-
-  prepare_artifacts_dir()
 
   tmp_out <- file.path(tempdir(), paste0("idpedu-test-", as.integer(runif(1, 1, 1e9))))
   dir.create(tmp_out, recursive = TRUE, showWarnings = FALSE)
@@ -124,10 +116,9 @@ test_that("Remote → PDF workflow works (stat.qmd)", {
   expect_true(file.exists(pdf_file))
 
   # Copy artifacts for manual inspection
-  copy_to_artifacts(c(
-    pdf_file,
-    file.path(tmp_out, paste0(fname, "_lsg.pdf"))
-  ))
+  pdf_lsg <- file.path(tmp_out, paste0(fname, "_lsg.pdf"))
+  expect_true(file.exists(pdf_lsg))
+  copy_to_artifacts(c(pdf_file, pdf_lsg))
 
   txt <- pdftools::pdf_text(pdf_file)
   expect_true(length(txt) >= 1)
