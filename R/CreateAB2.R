@@ -88,6 +88,7 @@ create_workbook <- function(
   if (verbose) message("Temporary directory created: '", temp_dir, "'.")
   
   # Copy the entire contents of the extdata directory to the temporary directory
+  # htwg_logo.png, da.qmd, stat.qmd, and other files
   copy_extdata(temp_dir)
   
   # Copy the task files to the temporary directory
@@ -122,7 +123,14 @@ create_workbook <- function(
       } else {
         quarto_render_cmd <- sprintf("quarto render %s --to %s -P lsg=%s", merged_qmd_path, format, ifelse(lsg, "true", "false"))
       }
-      system(quarto_render_cmd)
+      if (verbose) message("Running command: '", quarto_render_cmd, "'.")
+      res <- system(quarto_render_cmd, intern = TRUE, ignore.stderr = FALSE, ignore.stdout = FALSE)
+      if (!is.null(attr(res, "status")) && attr(res, "status") != 0) {
+        message("Error: The following command failed:\n  ", quarto_render_cmd)
+        message("Output:\n", paste(res, collapse = "\n"))
+      }
+      
+      
       output_file <- file.path(temp_dir, paste0("merged.", format))
       # Check if the output file exists
       if (!file.exists(output_file)) {
