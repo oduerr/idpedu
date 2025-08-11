@@ -1,0 +1,31 @@
+---
+output:
+  pdf_document:
+    highlight: pygments
+  html_document: 
+    default
+params:
+  lsg: TRUE
+---
+
+## Too easy?
+
+### a) Loading
+Load the dataset. You might use
+
+```{r, echo=TRUE, eval=TRUE}
+set.seed(1)
+df <- data.frame(
+  x = seq(20, 60, length.out = 100),
+  y = 100 + 1.1 * seq(20, 60, length.out = 100) + rnorm(100, sd = 5)
+)
+```
+
+### b) Average age
+Calculate the average age of the participants.
+
+```{r, echo=params$lsg, eval=params$lsg}
+mean(df$x)
+```
+
+

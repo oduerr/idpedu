@@ -9,4 +9,8 @@ Description: More about what it does (maybe more than one line)
 License: LGPL
 Depends: R (>= 3.0)
 RoxygenNote: 7.2.3
+Suggests: 
+    testthat (>= 3.0.0),
+    pdftools
+Config/testthat/edition: 3
 

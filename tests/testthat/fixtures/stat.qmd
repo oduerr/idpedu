@@ -1,0 +1,19 @@
+---
+output:
+  pdf_document:
+    includes:
+      in_header: preamble.tex
+  html_document: default
+params:
+  lsg: TRUE
+---
+
+```{r, echo=FALSE, results='asis'}
+if (knitr::is_latex_output()) {
+ cat('\n\\noindent\n\\begin{minipage}[t]{0.4\\textwidth}\n\\includegraphics[width=\\linewidth]{htwg_logo.png}\n\\end{minipage}\n\\hfill\n\\begin{minipage}[t]{0.6\\textwidth}\\raggedleft\n\\textbf{\\Large Statistik und Wahrscheinlichkeitsrechnung}\n\\end{minipage}\n ')
+} else {
+cat('\n<img src="htwg_logo.png" style="float:left; width:40%;" />\n<div style="float:right; width:60%; text-align:right;">\n  <strong style="font-size:large;">Statistik und Wahrscheinlichkeitsrechnung</strong>\n</div>\n<div style="clear:both;"></div>\n  ')
+}
+```
+
+
