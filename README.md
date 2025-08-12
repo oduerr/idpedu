@@ -13,26 +13,26 @@ Usefull tools for teaching statistics.
 ```
 
 ## Compile a worksheet
-The new command `create_workbook` renders HTML and PDF files from a list of tasks. The tasks `exercise1.qmd`, `exercise2.qmd` can be found at:
+The new command `create_workbook` renders HTML and PDF files from a list of tasks. Example tasks (`exercise1.qmd`, `exercise2.qmd`) live under the repository fixtures:
 
-- Demo tasks: https://github.com/oduerr/idpedu/tree/master/demo
+- Example tasks (fixtures): https://github.com/oduerr/idpedu/tree/master/tests/testthat/fixtures
 - Raw links for remote usage:
-  - https://raw.githubusercontent.com/oduerr/idpedu/master/demo/exercise1.qmd
-  - https://raw.githubusercontent.com/oduerr/idpedu/master/demo/exercise2.qmd
+  - https://raw.githubusercontent.com/oduerr/idpedu/master/tests/testthat/fixtures/exercise1.qmd
+  - https://raw.githubusercontent.com/oduerr/idpedu/master/tests/testthat/fixtures/exercise2.qmd
 
 ```r
   
   
-  ### Local Files
+  ### Local Files (if you cloned the repo)
   tasks = c(
-   "/Users/oli/Documents/GitHub/idpedu/demo/exercise1.qmd",
-   "/Users/oli/Documents/GitHub/idpedu/demo/exercise2.qmd"
+   "tests/testthat/fixtures/exercise1.qmd",
+   "tests/testthat/fixtures/exercise2.qmd"
   ) # list of tasks (can also be a single task)
   
   ### Remote Files (alternatively)
   tasks = c(
-   "https://raw.githubusercontent.com/oduerr/idpedu/master/demo/exercise1.qmd",
-   "https://raw.githubusercontent.com/oduerr/idpedu/master/demo/exercise2.qmd"
+   "https://raw.githubusercontent.com/oduerr/idpedu/master/tests/testthat/fixtures/exercise1.qmd",
+   "https://raw.githubusercontent.com/oduerr/idpedu/master/tests/testthat/fixtures/exercise2.qmd"
   ) # list of tasks (can also be a single task)
   
   
@@ -67,7 +67,7 @@ Solutions are shown only when `params.lsg` is `true`. The filter is enabled in `
 
 - Use the `quarto` package to preview the changes. RStudio will do as well. Much faster then compiling 'pdf'
 ```bash
-quarto preview exercise1.qmd
+quarto preview tests/testthat/fixtures/exercise1.qmd
 ```
 
 ## Thinks to consider

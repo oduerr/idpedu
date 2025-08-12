@@ -3,16 +3,16 @@ if (FALSE){
   library(idpedu)
   ### Local Files
   tasks = c(
-    "/Users/oli/Documents/GitHub/idpedu/demo/exercise1.qmd"#,
-    #"/Users/oli/Documents/GitHub/idpedu/demo/exercise2.qmd"
+    "tests/testthat/fixtures/exercise1.qmd"#,
+    #"tests/testthat/fixtures/exercise2.qmd"
   ) # list of tasks (can also be a single task)
   
   
   ### Remote Files
   if (FALSE){
     tasks = c(
-      #"https://raw.githubusercontent.com/oduerr/idpedu/master/demo/exercise1.qmd"
-      #"https://raw.githubusercontent.com/oduerr/idpedu/master/demo/exercise2.qmd"
+      #"https://raw.githubusercontent.com/oduerr/idpedu/master/tests/testthat/fixtures/exercise1.qmd"
+      #"https://raw.githubusercontent.com/oduerr/idpedu/master/tests/testthat/fixtures/exercise2.qmd"
     ) # list of tasks (can also be a single task)
   }
   

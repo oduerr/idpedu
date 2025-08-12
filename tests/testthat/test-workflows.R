@@ -175,7 +175,7 @@ test_that("Remote → PDF workflow works (stat.qmd)", {
   dir.create(tmp_out, recursive = TRUE, showWarnings = FALSE)
   on.exit(unlink(tmp_out, recursive = TRUE, force = TRUE), add = TRUE)
   tasks <- c(
-    "https://raw.githubusercontent.com/oduerr/idpedu/master/demo/exercise1.qmd"
+    "https://raw.githubusercontent.com/oduerr/idpedu/master/tests/testthat/fixtures/exercise3.qmd"
   )
   title <- "Week 1 (Simple Stuff)"
   fname <- "wk_remote_stat"
