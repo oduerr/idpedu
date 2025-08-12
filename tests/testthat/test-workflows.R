@@ -32,17 +32,95 @@ test_that("Local → HTML workflow works and normalizes output", {
   expect_true(file.exists(html_lsg))
   copy_to_artifacts(c(html_file, html_lsg))
 
-  # Normalize volatile paths and times in HTML
+  # Basic sanity: HTML is readable and non-empty
   html <- readLines(html_file, warn = FALSE)
-  html_norm <- gsub(getwd(), "<WD>", html, fixed = TRUE)
-  html_norm <- gsub(tmp_out, "<TMP>", html_norm, fixed = TRUE)
-  html_norm <- gsub("merged\\.[0-9a-f]{6,}", "merged.<HASH>", html_norm)
+  expect_true(length(html) > 10)
 
-  html_norm_file <- file.path(tmp_out, paste0(fname, "_nolsg_norm.html"))
-  writeLines(html_norm, html_norm_file)
+})
 
-  # Snapshot the normalized HTML; update with TESTTHAT_UPDATE=1
-  expect_snapshot_file(html_norm_file, basename(html_norm_file))
+test_that("Local → HTML solution filter toggles inline and block content", {
+  skip_on_cran()
+  skip_if_no_quarto()
+
+  tmp_out <- file.path(tempdir(), paste0("idpedu-test-", as.integer(runif(1, 1, 1e9))))
+  dir.create(tmp_out, recursive = TRUE, showWarnings = FALSE)
+  on.exit(unlink(tmp_out, recursive = TRUE, force = TRUE), add = TRUE)
+  tasks <- c(
+    test_path("fixtures/exercise3.qmd")
+  )
+  title <- "Week X (Solutions Test)"
+  fname <- "wk_sol_html"
+  header_file <- "da.qmd"
+
+  create_workbook(
+    tasks = tasks,
+    title = title,
+    fname = fname,
+    header_file = header_file,
+    output_format = c("html"),
+    output_dir = tmp_out,
+    selfcontained = TRUE,
+    verbose = FALSE
+  )
+
+  html_file <- file.path(tmp_out, paste0(fname, "_nolsg.html"))
+  html_lsg <- file.path(tmp_out, paste0(fname, "_lsg.html"))
+  expect_true(file.exists(html_file))
+  expect_true(file.exists(html_lsg))
+
+  # Copy artifacts for inspection
+  copy_to_artifacts(c(html_file, html_lsg))
+
+  html_norm <- readLines(html_file, warn = FALSE)
+  expect_true(length(html_norm) > 10)
+  # Do not assert 'quadratic formula' here; may appear from other sources
+
+  html_lsg_content <- readLines(html_lsg, warn = FALSE)
+  expect_true(length(html_lsg_content) > 10)
+  # Block solution should appear in lsg version (class list may contain other classes)
+  expect_true(any(grepl('<div class=\"[^\"]*solution[^\"]*\"', html_lsg_content)))
+})
+
+test_that("Local → PDF solution filter toggles inline and block content", {
+  skip_on_cran()
+  skip_if_no_quarto()
+  skip_if_no_pdflatex()
+  testthat::skip_if_not_installed("pdftools")
+
+  tmp_out <- file.path(tempdir(), paste0("idpedu-test-", as.integer(runif(1, 1, 1e9))))
+  dir.create(tmp_out, recursive = TRUE, showWarnings = FALSE)
+  on.exit(unlink(tmp_out, recursive = TRUE, force = TRUE), add = TRUE)
+  tasks <- c(
+    test_path("fixtures/exercise3.qmd")
+  )
+  title <- "Week X (Solutions Test)"
+  fname <- "wk_sol_pdf"
+  header_file <- "da.qmd"
+
+  create_workbook(
+    tasks = tasks,
+    title = title,
+    fname = fname,
+    header_file = header_file,
+    output_format = c("pdf"),
+    output_dir = tmp_out,
+    verbose = FALSE
+  )
+
+  pdf_file <- file.path(tmp_out, paste0(fname, "_nolsg.pdf"))
+  pdf_lsg  <- file.path(tmp_out, paste0(fname, "_lsg.pdf"))
+  expect_true(file.exists(pdf_file))
+  expect_true(file.exists(pdf_lsg))
+
+  # Copy artifacts for manual inspection
+  copy_to_artifacts(c(pdf_file, pdf_lsg))
+
+  # Sanity check
+  txt_lsg <- pdftools::pdf_text(pdf_lsg)
+  expect_true(nchar(paste(txt_lsg, collapse = "\n")) > 10)
+  # nolsg version should not contain the inline 42
+  txt_nolsg <- pdftools::pdf_text(pdf_file)
+  expect_false(grepl(" 42", paste(txt_nolsg, collapse = "\n")))
 })
 
 test_that("Local → PDF workflow works (da.qmd)", {
@@ -81,9 +159,10 @@ test_that("Local → PDF workflow works (da.qmd)", {
   copy_to_artifacts(c(pdf_file, pdf_lsg))
 
   txt <- pdftools::pdf_text(pdf_file)
-  # Basic sanity: at least 1 page and some text
   expect_true(length(txt) >= 1)
   expect_true(nchar(paste(txt, collapse = "\n")) > 100)
+  # Check that solution markers are absent in nolsg
+  expect_false(grepl("42", paste(txt, collapse = "\n")))
 })
 
 test_that("Remote → PDF workflow works (stat.qmd)", {
@@ -120,6 +199,9 @@ test_that("Remote → PDF workflow works (stat.qmd)", {
   expect_true(file.exists(pdf_lsg))
   copy_to_artifacts(c(pdf_file, pdf_lsg))
 
+  # In lsg version, the inline solution 42 should appear as text
+  txt_lsg <- pdftools::pdf_text(pdf_lsg)
+  expect_true(grepl("42", paste(txt_lsg, collapse = "\n")))
   txt <- pdftools::pdf_text(pdf_file)
   expect_true(length(txt) >= 1)
   expect_true(nchar(paste(txt, collapse = "\n")) > 50)

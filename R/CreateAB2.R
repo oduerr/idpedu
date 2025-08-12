@@ -120,11 +120,19 @@ create_workbook <- function(
   for (lsg in c(FALSE, TRUE)){
     for (format in output_format) {
       # Build Quarto command with optional execute-dir
+      # Export lsg flag to child process as env for robust detection in Lua filter
+      Sys.setenv(IDPEDU_LSG = ifelse(lsg, "true", "false"))
+
       args <- c(
         "quarto", "render", merged_qmd_path,
         "--to", format,
         "-P", sprintf("lsg=%s", ifelse(lsg, "true", "false"))
       )
+      # Ensure the solution filter is applied if available in temp_dir
+      sol_filter <- file.path(temp_dir, "solution.lua")
+      if (file.exists(sol_filter)) {
+        args <- c(args, "--lua-filter", sol_filter)
+      }
       if (format == "html" && selfcontained) args <- c(args, "--self-contained")
       if (!is.null(execute_dir)) args <- c(args, "--execute-dir", execute_dir)
       quarto_render_cmd <- paste(shQuote(args), collapse = " ")

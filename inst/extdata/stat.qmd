@@ -1,11 +1,14 @@
 ---
-output:
-  pdf_document:
-    includes:
-      in_header: preamble.tex
-  html_document: default
+format:
+  pdf:
+    include-in-header:
+      - preamble.tex
+  html:
+    self-contained: true
+filters:
+  - solution.lua
 params:
-  lsg: TRUE
+  lsg: true
 ---
 
 ```{r, echo=FALSE, results='asis'}

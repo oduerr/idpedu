@@ -43,6 +43,24 @@ The new command `create_workbook` renders HTML and PDF files from a list of task
   header_file = "da.qmd" # To change / add go into repository inst/extdata
   
   create_workbook(tasks=tasks, title = title, fname=fname,  header_file=header_file)
+
+### Marking solutions in content (HTML and PDF)
+
+- Inline (recommended for short answers):
+
+```
+[Solution. The quadratic formula is $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.]{.solution}
+```
+
+- Block (for longer solutions):
+
+```
+::: {.solution}
+This is a block solution with math: $a^2 + b^2 = c^2$.
+:::
+```
+
+Solutions are shown only when `params.lsg` is `true`. The filter is enabled in `inst/extdata/da.qmd` and `inst/extdata/stat.qmd`.
 ```
 
 ## Tips for developing the worksheets:

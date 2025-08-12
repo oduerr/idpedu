@@ -1,0 +1,22 @@
+---
+title: "Exercise 3"
+format:
+  html: default
+  pdf: default
+params:
+  lsg: true
+---
+
+## Inline and block solutions test
+
+This is a question with an inline answer: [42]{.solution}.
+
+[Solution. The quadratic formula is $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.]{.solution}
+
+::: {.solution}
+Block solution demo text.
+:::
+
+And here is a regular paragraph that should always be visible.
+
+
