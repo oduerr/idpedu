@@ -108,6 +108,34 @@ The header file is a markdown file which is included at the beginning of the wor
 ## Tips for developing the package:
 You can use `devtools::load_all()` to load the chances.
 
+## Callouts (HTML/PDF)
+
+You can use Quarto callouts in tasks; they render in both HTML and PDF:
+
+```markdown
+::: {.callout-note}
+#### Hint
+Remember to center your variables.
+:::
+
+::: {.callout-tip}
+You can vectorize this step. [Answer: 42]{.solution}
+:::
+
+::: {.callout-warning}
+Watch numeric stability here.
+:::
+
+::: {.callout-important collapse="true"}
+#### Read this first
+Setup instructions...
+:::
+```
+
+HTML math is enabled via KaTeX in `inst/extdata/da.qmd` and `inst/extdata/stat.qmd`. For easier hosting, these headers set `self-contained: false`.
+
+- Note: For reliable styling of HTML callouts, render with `selfcontained = TRUE` (or set `format: html: self-contained: true` in the header). Some environments may not pick up external assets when not self-contained.
+
 
 
 

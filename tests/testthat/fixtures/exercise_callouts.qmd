@@ -1,0 +1,34 @@
+---
+title: "Exercise Callouts"
+format:
+  html: default
+  pdf: default
+params:
+  lsg: true
+---
+
+## Callouts demo
+
+::: {.callout-note}
+#### Hint
+Use vectorization to speed up your code.
+:::
+
+::: {.callout-tip}
+[Answer: 42]{.solution}
+:::
+
+::: {.callout-warning}
+Beware of floating point issues.
+:::
+
+::: {.callout-important collapse="true"}
+#### Read this first
+Setup instructions...
+:::
+
+## Block solution inside content
+
+::: {.solution}
+Block solution text with math: $a^2 + b^2 = c^2$.
+:::

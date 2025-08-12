@@ -149,13 +149,46 @@ create_workbook <- function(
       if (!file.exists(output_file)) {
         stop("Error: Output file not found: ", output_file)
       }
-      
-      
+ 
+      # If HTML is not self-contained, also copy the resource directory (e.g., merged_files)
+      if (identical(format, "html") && isFALSE(selfcontained)) {
+        resources_dir <- file.path(temp_dir, "merged_files")
+        if (dir.exists(resources_dir)) {
+          # Copy to output_dir keeping the same directory name referenced by the HTML
+          file.copy(resources_dir, file.path(output_dir, basename(resources_dir)), recursive = TRUE, overwrite = TRUE)
+        }
+
+        # Copy any other local assets referenced by the HTML (e.g., images like htwg_logo.png)
+        html_lines <- tryCatch(readLines(output_file, warn = FALSE), error = function(e) character())
+        if (length(html_lines) > 0) {
+          refs <- unique(c(
+            unlist(regmatches(html_lines, gregexpr('src=\"([^\"]+)\"', html_lines))),
+            unlist(regmatches(html_lines, gregexpr('href=\"([^\"]+)\"', html_lines)))
+          ))
+          # Extract the path inside the quotes
+          refs <- gsub('^(src|href)=\"', '', refs)
+          refs <- gsub('\"$', '', refs)
+          # Keep only local relative files (exclude protocols, fragments, data URIs, and the resource dir already copied)
+          is_local <- function(x) {
+            !grepl('^(https?:|data:|#)', x) && nzchar(x)
+          }
+          ref_paths <- refs[is_local(refs) & !grepl('^merged_files/', refs)]
+          for (rel in unique(ref_paths)) {
+            src <- file.path(temp_dir, rel)
+            if (file.exists(src)) {
+              dest <- file.path(output_dir, rel)
+              dir.create(dirname(dest), recursive = TRUE, showWarnings = FALSE)
+              file.copy(src, dest, overwrite = TRUE)
+            }
+          }
+        }
+      }
+ 
       lsg_suffix <- ifelse(lsg, "lsg", "nolsg")
       final_output_file <- file.path(output_dir, paste0(fname, '_', lsg_suffix, ".", format))
       # Copy the final document to the output directory
       file.copy(output_file, file.path(final_output_file), overwrite = TRUE)
-      
+ 
       message("Output file saved as '", final_output_file, "'.")
     } # end format loop
   } # end lsg loop
