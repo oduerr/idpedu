@@ -3,12 +3,19 @@ idpedu
 
 Usefull tools for teaching statistics.
 
-## To install the packages
+## Install from the v0.2.0 release
 
+- From release asset:
 ```r
-  library(devtools)  # You might need to install devtools first
-  install_github("oduerr/idpedu") 
-  library(idpedu)
+install.packages("https://github.com/oduerr/idpedu/releases/download/v0.2.0/idpedu_0.2.0.tar.gz", repos = NULL, type = "source")
+library(idpedu)
+```
+
+- Or from the tagged commit:
+```r
+if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
+remotes::install_github("oduerr/idpedu@v0.2.0")
+library(idpedu)
 ```
 
 ## Compile a worksheet
@@ -142,7 +149,7 @@ HTML math is enabled via KaTeX in `inst/extdata/da.qmd` and `inst/extdata/stat.q
 
 
 
-
+x
 
 
 
