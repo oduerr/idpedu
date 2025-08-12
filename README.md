@@ -6,22 +6,66 @@ Usefull tools for teaching statistics.
 ## To install the packages
 
 ```r
-  #install.packages("https://github.com/oduerr/idpedu/releases/download/quarto_1st/idpedu_0.1.tar.gz", repos = NULL, type = "source")
   library(devtools)  # You might need to install devtools first
   install_github("oduerr/idpedu") 
   library(idpedu)
 ```
 
 ## Compile a worksheet
-The new command `create_workbook` renders HTML and PDF files from a list of tasks. Example tasks (`exercise1.qmd`, `exercise2.qmd`) live under the repository fixtures:
+The new command `create_workbook` renders HTML and PDF files from a list of tasks. Example tasks (`exercise1.qmd`, `exercise2.qmd`, `exercise3.qmd`) live under the repository fixtures:
 
+
+### Example tasks:
 - Example tasks (fixtures): https://github.com/oduerr/idpedu/tree/master/tests/testthat/fixtures
 - Raw links for remote usage:
   - https://raw.githubusercontent.com/oduerr/idpedu/master/tests/testthat/fixtures/exercise1.qmd
   - https://raw.githubusercontent.com/oduerr/idpedu/master/tests/testthat/fixtures/exercise2.qmd
+  - https://raw.githubusercontent.com/oduerr/idpedu/master/tests/testthat/fixtures/exercise3.qmd
 
+
+### Tips for developing the worksheets:
+
+#### Include solutions in the worksheet 
+
+- Inline (recommended for short answers):
 ```r
-  
+[Solution. The quadratic formula is $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.]{.solution}
+```
+
+- Block (for longer solutions):
+```r
+::: {.solution}
+This is a block solution with math: $a^2 + b^2 = c^2$.
+:::
+``` 
+(see below).
+
+#### Code chunks
+
+- Use `echo=lsg` and/or `eval=lsg` to control the visibility of the solutions.
+
+```
+  ```{r, echo=lsg, eval=lsg}
+  # Code chunk with solutions
+  ```
+
+
+
+
+
+
+
+
+
+
+- Use the `quarto` package to preview the changes. RStudio will do as well. Much faster then compiling 'pdf'
+```bash
+quarto preview tests/testthat/fixtures/exercise1.qmd
+```
+
+
+### Compile a worksheet
+```r
   
   ### Local Files (if you cloned the repo)
   tasks = c(
@@ -38,30 +82,12 @@ The new command `create_workbook` renders HTML and PDF files from a list of task
   
   title = "Week 1 (Simple Stuff)" # Title of the worksheet
   fname='week1' # Name of the file(s) which are produces
-  
   # Stays the same for all worksheets for a given course
   header_file = "da.qmd" # To change / add go into repository inst/extdata
   
   create_workbook(tasks=tasks, title = title, fname=fname,  header_file=header_file)
-
-### Marking solutions in content (HTML and PDF)
-
-- Inline (recommended for short answers):
-
-```
-[Solution. The quadratic formula is $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.]{.solution}
 ```
 
-- Block (for longer solutions):
-
-```
-::: {.solution}
-This is a block solution with math: $a^2 + b^2 = c^2$.
-:::
-```
-
-Solutions are shown only when `params.lsg` is `true`. The filter is enabled in `inst/extdata/da.qmd` and `inst/extdata/stat.qmd`.
-```
 
 ## Tips for developing the worksheets:
 
