@@ -1,3 +1,9 @@
+# idpedu 0.2.0
+
+- Enable KaTeX for HTML math in headers; add callouts fixture and tests (HTML/PDF).
+- Improve HTML artifact handling when not self-contained.
+- Add concise README notes and `dev/package_howto.md` for release steps.
+
 # idpedu 0.101
 
 - Added workflow tests (HTML/PDF/remote) and fixtures.

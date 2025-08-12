@@ -1,10 +1,10 @@
 Package: idpedu
 Type: Package
 Title: Utilities for teaching statistics with R 
-Version: 0.10142
-Date: 2025-6-22
+Version: 0.2.0
+Date: 2025-08-12
 Author: oliver duerr
-Maintainer: Who to complain to <yourfault@somewhere.net>
+Maintainer: Oliver Dürr <od@zhaw.ch>
 Description: Create combined HTML and PDF worksheets from Quarto '.qmd' tasks,
     with and without solutions, using a single high-level function.
 License: LGPL
@@ -13,5 +13,6 @@ Suggests:
     testthat (>= 3.0.0),
     pdftools
 Config/testthat/edition: 3
+Encoding: UTF-8
 RoxygenNote: 7.2.3
 
